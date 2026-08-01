@@ -26,3 +26,9 @@ tamper_paths.enable_variable_textures = false
 
 ---
 Copyright (C) 2015-2026 TumeniNodes
+## License
+
+* **Code:** CC-BY-SA 4.0 (See LICENSE file)
+* **Textures & Media:** CC-BY-SA 4.0 (See LICENSE file)
+
+![Mod Pack Screenshot](https://raw.githubusercontent.com/TumeniNodes/tamper_paths/refs/heads/master/screenshot.png)
