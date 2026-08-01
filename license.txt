@@ -10,3 +10,15 @@ Attribution-ShareAlike 4.0 International License (CC-BY-SA 4.0):
 
 To view a copy of this license, visit:
 https://creativecommons.org
+
+==================================================================
+
+Textures
+--------
+The texture files "default_brick_2.png", "default_brick_3.png", 
+"default_brick_4.png", "default_cobble_2.png", "default_cobble_3.png", 
+and "default_cobble_4.png" are derivatives of the original Minetest Game 
+(Luanti) textures, modified by TumeniNodes.
+
+Original textures by the Minetest development team.
+Licensed under CC-BY-SA 3.0: https://creativecommons.org
