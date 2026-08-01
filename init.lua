@@ -1,10 +1,8 @@
 --=================================================================================================
 -- [MOD]Tamper Paths[mod]tamper_paths (Ver. 0.9) Copyright (C) 2015-2026 TumeniNodes August 1, 2026
 --=================================================================================================
--- Read configuration setting from the menu screen toggle
 local enable_variants = minetest.settings:get_bool("tamper_paths.enable_variable_textures")
 
--- Default to true if the setting doesn't exist yet in minetest.conf
 if enable_variants == nil then
     enable_variants = true
 end
@@ -14,8 +12,7 @@ local tool_to_material = {
     gravel      = { node = "default:gravel",      variants = 4, rotate = true },
     cobble      = { node = "default:cobble",      variants = 4, rotate = false },
     brick       = { node = "default:brick",       variants = 4, rotate = false },
-    -- Feature completely removed from stone_block by limiting variants strictly to 1
-    stone_block = { node = "default:stone_block", variants = 1, rotate = false }
+stone_block = { node = "default:stone_block", variants = 1, rotate = false }
 }
 
 local path_mapping = {}
@@ -42,7 +39,6 @@ for tool_key, config in pairs(tool_to_material) do
             primary_tile = def.tiles
         end
 
-        -- Calculate how many node versions to actually register
         local total_loop_variants = config.variants
         if not enable_variants then
             total_loop_variants = 1
@@ -51,7 +47,6 @@ for tool_key, config in pairs(tool_to_material) do
         for v = 1, total_loop_variants do
             local path_node_name = "tamper_paths:path_" .. clean_id .. "_" .. v
 
-            -- Build the 6-sided tile block list cleanly
             local expanded_tiles = {}
             for i = 1, 6 do
                 if type(def.tiles) == "table" then
@@ -61,7 +56,6 @@ for tool_key, config in pairs(tool_to_material) do
                 end
             end
 
-            -- Apply textures conditionally based on global preferences
             if config.rotate and enable_variants then
                 expanded_tiles[1] = primary_tile .. rot_transforms[v]
             else
@@ -133,7 +127,6 @@ for _, tool in ipairs(tools_config) do
                 local mat_config = tool_to_material[tool.id]
 
                 if material_variants and mat_config then
-                    -- Force static placement index 1 if variant system is turned off
                     local target_index = 1
                     if enable_variants and mat_config.variants > 1 then
                         target_index = math.random(1, mat_config.variants)

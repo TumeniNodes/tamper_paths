@@ -1,27 +1,28 @@
-# Tamper Paths
+# Tamper Paths (ver. 0.9)
 
-A mod for Minetest Game that adds tamping tools to create pathways that ar 1 pixel lower than standard blocks.
-Right-clicking a solid block with a tool turns it into a lowered path.
+A mod for Luanti (Minetest) that allows players to create realistic, worn pathways using dedicated tamping tools.
 
-## Tamping Tools
-* **Dirt Path Tamper** -> Creates 1px lower Dirt Paths.
-* **Cobble Path Tamper** -> Creates 1px lower Cobble Paths (Supports facedir/rotation).
-* **Brick Path Tamper** -> Creates 1px lower Brick Paths (Supports facedir/rotation).
-* **Gravel Path Tamper** -> Creates 1px lower Gravel Paths.
+## Configuration
 
-## Crafting Recipes
-Craft your tools using two sticks and one block of the target material arranged vertically in the crafting grid:
+You can customize how path textures behave either through the in-game Settings menu or directly via your configuration files.
+
+### In-Game Menu
+1. Go to the main Luanti menu screen.
+2. Select **Settings** -> **All Settings** -> **Mods** -> **tamper_paths**.
+3. Toggle the **Enable Path Variations** option on or off.
+
+### Manual Configuration (`minetest.conf`)
+If you are hosting a server or prefer manual file configuration, add the following line to your `minetest.conf` file:
 
 ```text
-[   ]  [Stick]  [   ]
-[   ]  [Stick]  [   ]
-[   ]  [Block]  [   ]
+# Enable variable path textures and rotations (true = enabled, false = disabled)
+tamper_paths.enable_variable_textures = false
 ```
 
-## Dependencies
-* `default` (Minetest Game)
+*   **`true` (Default)**: Path nodes automatically apply random texture rotations and sequential visual variants.
+*   **`false`**: Bypasses rotations and alternate layouts, locking paths to uniform, static base textures.
 
-## License
-All code and media are copyright (c) 2015 - 2026 TumeniNodes. 
-Specific media assets are licensed under CC-BY-SA 4.0 International.
-See the `LICENSE` file for details.
+*Note: The `default_stone_block` node is intentionally hardcoded to remain uniform and static regardless of this setting.*
+
+---
+Copyright (C) 2015-2026 TumeniNodes
