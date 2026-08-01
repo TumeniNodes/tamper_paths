@@ -1,0 +1,2 @@
+# Enable variable path textures and rotations
+tamper_paths.enable_variable_textures (Enable Path Variations) bool true

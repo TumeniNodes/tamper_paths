@@ -1,0 +1,12 @@
+All code and media copyright (c) 2015 - 2026 TumeniNodes
+
+The following media assets are licensed under the Creative Commons 
+Attribution-ShareAlike 4.0 International License (CC-BY-SA 4.0):
+- tamper_paths_tool_brick.png
+- tamper_paths_tool_cobble.png
+- tamper_paths_tool_dirt.png
+- tamper_paths_tool_gravel.png
+- tamper_paths_tool_stone_block.png
+
+To view a copy of this license, visit:
+https://creativecommons.org
