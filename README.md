@@ -51,5 +51,7 @@ HEAD
 
 ![Mod Pack Screenshot](https://raw.githubusercontent.com/TumeniNodes/tamper_paths/refs/heads/master/screenshot.png)
 
+![Mod Pack Screenshot](https://raw.githubusercontent.com/TumeniNodes/tamper_paths/refs/heads/master/Screenshot_3D_overgrowth.png)
+
 Licensed under CC-BY-SA 4.0 International
 bf94f49 (add 3D overgrowth companion mod and all old source files for future use or collaboration)
