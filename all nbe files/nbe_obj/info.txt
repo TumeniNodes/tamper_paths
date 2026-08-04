@@ -1,0 +1,5 @@
+ I exported these models just in case I, (or anyone else) ever want's to use mesh nodes rather than the crazy nodeboxes.
+ When importing into Blockbench you will find a node named "converted_out" (it will be at the top of the list, .. you want to delete that mesh as your first step.
+ Then, ..good luck from there deleting ALL those unecessary faces and then UV editing.. (you are a much braver soul than me)
+
+ TumeniNodes
