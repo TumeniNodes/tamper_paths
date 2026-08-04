@@ -127,9 +127,27 @@ for _, tool in ipairs(tools_config) do
                 local mat_config = tool_to_material[tool.id]
 
                 if material_variants and mat_config then
-
                     local target_index = 1
-                    if enable_variants and mat_config.variants > 1 then
+                    local is_already_path = false
+                    local current_variant_idx = nil
+
+                    -- Check if the clicked node is already a variant of the current tool's path type
+                    for idx, node_name in pairs(material_variants) do
+                        if clicked_node.name == node_name then
+                            is_already_path = true
+                            current_variant_idx = idx
+                            break
+                        end
+                    end
+
+                    if is_already_path and enable_variants and mat_config.variants > 1 then
+                        -- Cycle to the next variant sequentially
+                        target_index = current_variant_idx + 1
+                        if target_index > mat_config.variants then
+                            target_index = 1
+                        end
+                    elseif enable_variants and mat_config.variants > 1 then
+                        -- Calculate the initial variant deterministically via coordinates
                         local spatial_hash = math.sin(pos.x * 12.9898 + pos.y * 78.233 + pos.z * 43.121) * 43758.5453
                         target_index = math.floor((spatial_hash - math.floor(spatial_hash)) * mat_config.variants) + 1
                     end
@@ -137,27 +155,31 @@ for _, tool in ipairs(tools_config) do
                     local target_path_node = material_variants[target_index]
 
                     if target_path_node then
-                        local path_def = minetest.registered_nodes[target_path_node]
-                        if path_def and path_def.sounds and path_def.sounds.place then
-                            minetest.sound_play(path_def.sounds.place, {pos = pos, gain = 1.0}, true)
-                        end
+                        -- Only execute if we are changing variants or creating a brand-new path node
+                        if clicked_node.name ~= target_path_node then
+                            local path_def = minetest.registered_nodes[target_path_node]
+                            if path_def and path_def.sounds and path_def.sounds.place then
+                                minetest.sound_play(path_def.sounds.place, {pos = pos, gain = 1.0}, true)
+                            end
 
-                        local final_param2 = 0
-                        if not mat_config.rotate then
-                            local p_dir = placer:get_look_dir()
-                            final_param2 = minetest.dir_to_facedir(p_dir)
-                        end
+                            -- Preserve direction if it's already a path, otherwise use player look direction
+                            local final_param2 = clicked_node.param2
+                            if not is_already_path and not mat_config.rotate then
+                                local p_dir = placer:get_look_dir()
+                                final_param2 = minetest.dir_to_facedir(p_dir)
+                            end
 
-                        minetest.set_node(pos, {
-                            name = target_path_node,
-                            param2 = final_param2
-                        })
+                            minetest.set_node(pos, {
+                                name = target_path_node,
+                                param2 = final_param2
+                            })
 
-                        local p_name = placer:get_player_name()
-                        local is_creative = minetest.check_player_privs(p_name, {creative = true})
+                            local p_name = placer:get_player_name()
+                            local is_creative = minetest.check_player_privs(p_name, {creative = true})
 
-                        if not is_creative and not minetest.settings:get_bool("creative_mode") then
-                            itemstack:add_wear(65535 / 50)
+                            if not is_creative and not minetest.settings:get_bool("creative_mode") then
+                                itemstack:add_wear(65535 / 50)
+                            end
                         end
 
                         return itemstack
@@ -223,3 +245,4 @@ minetest.register_craft({
         {"", "default:stone_block", ""}
     }
 })
+
